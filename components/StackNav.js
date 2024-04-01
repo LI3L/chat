@@ -7,11 +7,21 @@ import SignUpScreen from "./signUp";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+function MessagesScreen({ navigation }) {
+  const [messagesList, setMessagesList] = useState("");
+  const [message, setMessage] = useState("");
 
-
-function MessagesScreen({ message, setMessage }) {
+  socket.on("message", (message) => {
+    setMessagesList([...messagesList, message]);
+  });
   return (
     <View style={styles.container}>
+      <Text>Messages</Text>
+      {/* {console.log(messagesList)} */}
+      {messagesList &&
+        messagesList.map((msg, index) => <Text key={index}>{msg}</Text>)}
+
+      <Text>Send a message</Text>
       <Input value={message} onChangeText={setMessage} />
       <Button onPress={() => socket.emit("message", message)}>Send</Button>
     </View>
@@ -21,15 +31,6 @@ function MessagesScreen({ message, setMessage }) {
 const Stack = createNativeStackNavigator();
 
 export default function StackNav() {
-  const [messagesList, setMessagesList] = useState("");
-  const [message, setMessage] = useState("");
-
-  console.log(messagesList);
-
-  socket.on("message", (message) => {
-    setMessagesList([...messagesList, message]);
-  });
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Sign Up">
