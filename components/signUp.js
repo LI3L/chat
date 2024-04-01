@@ -9,8 +9,8 @@ const SignUpScreen = ({ navigation }) => {
     navigation.navigate("Messages");
     console.log("User Data:", userData);
   };
-
-  return (
+  
+  return userData && (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Sign Up</Text>
       <TextInput

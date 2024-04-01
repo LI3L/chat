@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import TabNav from "./components/TabNav";
+import StackNav from "./components/StackNav";
+import { UserProvider } from "./components/UserContext";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <TabNav />
-    </NavigationContainer>
+    <UserProvider>
+      <StackNav />
+    </UserProvider>
   );
 }
 

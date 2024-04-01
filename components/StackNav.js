@@ -1,18 +1,13 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useState } from "react";
 import { Button, Input } from "@rneui/base";
 import socket from "../utils/socket";
 import SignUpScreen from "./signUp";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-function signUpScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <SignUpScreen navigation={navigation} />
-    </View>
-  );
-}
+
 
 function MessagesScreen({ message, setMessage }) {
   return (
@@ -23,9 +18,9 @@ function MessagesScreen({ message, setMessage }) {
   );
 }
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export default function TabNav() {
+export default function StackNav() {
   const [messagesList, setMessagesList] = useState("");
   const [message, setMessage] = useState("");
 
@@ -36,13 +31,12 @@ export default function TabNav() {
   });
 
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="SignUp" component={() => signUpScreen()} />
-      <Tab.Screen
-        name="Messages"
-        component={() => MessagesScreen(message, setMessage)}
-      />
-    </Tab.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Sign Up">
+        <Stack.Screen name="Sign Up" component={SignUpScreen} />
+        <Stack.Screen name="Messages" component={MessagesScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
