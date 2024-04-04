@@ -1,32 +1,9 @@
-import * as React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { useState } from "react";
-import { Button, Input } from "@rneui/base";
-import socket from "../utils/socket";
-import SignUpScreen from "./signUp";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-function MessagesScreen({ navigation }) {
-  const [messagesList, setMessagesList] = useState("");
-  const [message, setMessage] = useState("");
-
-  socket.on("message", (message) => {
-    setMessagesList([...messagesList, message]);
-  });
-  return (
-    <View style={styles.container}>
-      <Text>Messages</Text>
-      {/* {console.log(messagesList)} */}
-      {messagesList &&
-        messagesList.map((msg, index) => <Text key={index}>{msg}</Text>)}
-
-      <Text>Send a message</Text>
-      <Input value={message} onChangeText={setMessage} />
-      <Button onPress={() => socket.emit("message", message)}>Send</Button>
-    </View>
-  );
-}
+import * as React from "react";
+import { StyleSheet } from "react-native";
+import MessagesScreen from "./Messages";
+import SignUpScreen from "./signUp";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +23,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+  },
+  TI: {
+    width: "100%",
+    marginBottom: 10,
+    backgroundColor: "lightgrey",
   },
 });
