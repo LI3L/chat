@@ -25,52 +25,14 @@ const SignUpScreen = ({ navigation }) => {
           placeholder="Name"
           value={userData.name}
           onChangeText={(text) =>
-            setUserData((prevData) => ({ ...prevData, name: text }))
+            setUserData((prevData) => ({
+              ...prevData,
+              name: text,
+              id: Math.random().toString(36).substring(7),
+            }))
           }
         />
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            margin: 10,
-            padding: 5,
-          }}
-          placeholder="Email"
-          value={userData.email}
-          onChangeText={(text) =>
-            setUserData((prevData) => ({ ...prevData, email: text }))
-          }
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            margin: 10,
-            padding: 5,
-          }}
-          placeholder="Gender"
-          value={userData.gender}
-          onChangeText={(text) =>
-            setUserData((prevData) => ({ ...prevData, gender: text }))
-          }
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: "gray",
-            borderWidth: 1,
-            margin: 10,
-            padding: 5,
-          }}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={userData.password}
-          onChangeText={(text) =>
-            setUserData((prevData) => ({ ...prevData, password: text }))
-          }
-        />
+
         <Button title="Sign Up" onPress={handleSignUp} />
       </View>
     )
